@@ -10,7 +10,7 @@ using System.Text.Json;
  * The program is made by Sofia Widholm
  * Moment 3, Programmering i C#
  * Webbutvecklingsprogrammet, Mittuniversitetet
- * Last update: 2022-12-04
+ * Last update: 2022-12-05
 */
 
 namespace posts 
@@ -34,7 +34,7 @@ namespace posts
             }
         }
 
-        // Method to add post
+        // Method to add a post
         public Post addPost (Post post)
         {
             // Adds the object to the array of posts
@@ -54,7 +54,6 @@ namespace posts
             writeToFile();
 
             return index;
-            
         }
 
         // Method that return an array of all posts
@@ -134,13 +133,13 @@ namespace posts
             // Save option input for menu to a variable
             int option = (int) Console.ReadKey(true).Key;
 
-            // Switch that runs different code based on value of variable option
+            // Switch that runs different code based on value of option variable
             switch (option)
             {
                 case '1':
-                    // Visible cursor
+                    // Cursor visible
                     Console.CursorVisible = true;
-                    // New instance of object Post
+                    // New instance of Post
                     Post obj = new Post();
 
                     // Printing of text for input
@@ -148,6 +147,7 @@ namespace posts
                     // Saving of input to variable
                     string author = Console.ReadLine();
 
+                    // While loop that runs as long the string is empty
                     while (String.IsNullOrEmpty(author))
                     {
                         // Printing of error message
@@ -158,13 +158,16 @@ namespace posts
                         author = Console.ReadLine();
                     }
 
-                    // Saves varible to object
+                    // Saves variable to object
                     obj.Author = author;
+
+                    
                     // Printing of text for input
                     Console.Write("Meddelande: ");
                     // Savíng of input to variable
                     string message = Console.ReadLine();
 
+                    // While loop that runs as long the string is empty
                     while (String.IsNullOrEmpty(message))
                     {
                         // Printing of error message
@@ -175,19 +178,21 @@ namespace posts
                         message = Console.ReadLine();
                     }
 
-                    // Saves varible to object
+                    // Saves variable to object
                     obj.Message = message;
 
-                    // If statement that checks that variable isn't empty
+
+                    // If statement that checks that strings aren't empty
                     if (!String.IsNullOrEmpty(author) && !String.IsNullOrEmpty(message))
                     {
                         // Saves post to JSON file
                         guestbook.addPost(obj);
                     }
-                    
+
                     break;
+
                 case '2':
-                    // Visible cursor
+                    // Cursor visible
                     Console.CursorVisible = true;
                     // Printing of text for input
                     Console.Write("Ange nummer på inlägg som ska raderas: ");
@@ -196,6 +201,7 @@ namespace posts
                     // Converting variable to integer and call of method to delete post
                     guestbook.deletePost(Convert.ToInt32(postIndex));
                     break;
+
                 case '3':
                     // Quit program
                     Environment.Exit(0);
